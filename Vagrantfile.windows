@@ -1,0 +1,22 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "jacqinthebox/windowsserver2016"
+  config.vm.guest = :windows
+  config.vm.communicator = "winrm"
+  config.windows.halt_timeout = 15
+  config.vm.network "public_network", bridge: "Default Switch"
+  config.vm.synced_folder ".", "/vagrant", type: "winrm"
+  config.winrm.username = "vagrant"
+  config.winrm.password = "vagrant"
+
+  config.vm.define "vm01" do |vm01|
+    vm01.vm.hostname = "vm01"
+    vm01.vm.provider "hyperv" do |v|
+      v.memory = 3072
+      v.cpus = 2
+    end
+  end
+
+end
+
+
+  
