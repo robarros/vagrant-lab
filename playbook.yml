@@ -1,0 +1,16 @@
+---
+- name: Web
+  hosts: all 
+  become: true
+  become_method: sudo
+  gather_facts: False
+  tasks:
+    - name: install nginx
+      yum: 
+        name: nginx
+        state: latest
+    - name: enable nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
